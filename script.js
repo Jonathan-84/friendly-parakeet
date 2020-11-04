@@ -1,7 +1,7 @@
 // Assignment code here
 var lowercase=  ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 var uppercase= ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-var numbers= [0,1,2,3,4,5,6,7,8,9]
+var numbers= ["0","1","2","3","4","5","6","7","8","9"]
 var specialCharacters= ["#","$","%","&","'","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~" ]
 
 //var userChoices= {
@@ -19,7 +19,7 @@ var userChoices= {
   length: undefined
 };
 
-//var selectedCharacters="";
+
 
 var selectionCriteria= function() {
 var passwordLength = window.prompt("Please select the length of your password. Minimum of characters and Maximum of 128 characters.");
@@ -29,45 +29,32 @@ if (passwordLength > 7 && passwordLength < 129) {
 else {
   window.alert("Password length doesn't meet company security standards. Please select a number between 8 and 128.");
 }
-//console.log("The function is running")
+
+var confirmSpecialCharacter= window.confirm(" Do you want to include special characters in your password?");
+    userChoices.specialCharacters = confirmSpecialCharacter;
+  //  if (userChoices.specialCharacters == true){
+    //selectedCharacters+= specialCharacters
+  //}
+    var confirmNumber = window.confirm (" Do you want to include numbers in your password?");
+    userChoices.numbers= confirmNumber;
+  //if (userChoices.specialCharacters == true){
+    //selectedCharacters += numbers
+  //}
+    var confirmUppercase = window.confirm( " Do you want to include upper case letters?");
+    userChoices.uppercase = confirmUppercase;
+    // if (userChoices.uppercase == true) {
+      //selectedCharacters+= uppercase
+  //}
+      var confirmLowercase = window.confirm(" Do you want to include lower case letters?");
+      userChoices.lowercase = confirmLowercase;
+    //  if (userChoices.lowercase == true) {
+      //  selectedCharacters += lowercase
+ // }//console.log("The function is running")
 
 //return selectionCriteria();
 };
 
-//var confirmLowercase = window.confirm(" Do you want to include lower case letters?");
-//if (confirmLowercase) {
-  //var randomLowercase= getRandom(lowercase)
-  //userChoices.lowercase = confirmLowercase;
-//window.alert ("Lower case letters will be included in your password");
-//if (userChoices.lowercase) {
-  //selectedCharacters += lowercase
-//}
 
-
-//var confirmUppercase = window.confirm( " Do you want to include upper case letters?");
-//if (confirmUppercase) {
-  //var randomUppercase= getRandom(uppercase)
-  //window.alert("Upper case letters will be included in your password");
-//userChoices.uppercase = confirmUppercase;
-//if (userChoices.uppercase) {
-  //selectedCharacters+= uppercase
-//}
-
-//var confirmNumber = window.confirm (" Do you want to include numbers in your password?");
-//if (confirmNumbers) {
-  //var randomNumber =getRandom(numbers)
- // userChoices.numbers= confirmNumber;
-//if (userChoices.specialCharacters){
- // selectedCharacters += numbers
-//}
-
-//var confirmSpecialCharacter= window.confirm(" Do you want to include special characters in your password?");
-//if (confirmSpecialCharacters) {
-  //var randomCharacter = getRandom(specialCharacters)
-  //userChoices.specialCharacters = confirmSpecialCharacter;
-  //if (userChoices.specialCharacters){
-  //   selectedCharacters+= specialCharacters
-//}
 
 //return selectionCriteria()
 //};
@@ -82,38 +69,31 @@ else {
 //Generated password needs to be commented back in after changes are made
 var generatePassword = function() {
   selectionCriteria();
-  console.log(userChoices.length)
- 
-  function chosenPossiblities (){
-    selectedCharacters= [""] ; 
-    var confirmSpecialCharacter= window.confirm(" Do you want to include special characters in your password?");
-    userChoices.specialCharacters = confirmSpecialCharacter;
-    if (userChoices.specialCharacters == true){
-    selectedCharacters+= specialCharacters
+  //console.log(userChoices)
+ var allPossibilities=[]
+ if (userChoices.lowercase == true) {
+   allPossibilities= allPossibilities.concat(lowercase)
+   console.log ("what is true")
+ }
+ if (userChoices.uppercase == true) {
+   allPossibilities= allPossibilities.concat(uppercase)
+ }
+  if (userChoices.numbers == true) {
+    allPossibilities= allPossibilities.concat(numbers)
   }
-    var confirmNumber = window.confirm (" Do you want to include numbers in your password?");
-    userChoices.numbers= confirmNumber;
-  if (userChoices.specialCharacters == true){
-    selectedCharacters += numbers
+  if (userChoices.specialCharacters == true) {
+    allPossibilities= allPossibilities.concat(specialCharacters)
   }
-    var confirmUppercase = window.confirm( " Do you want to include upper case letters?");
-    userChoices.uppercase = confirmUppercase;
-     if (userChoices.uppercase == true) {
-      selectedCharacters+= uppercase
-  }
-      var confirmLowercase = window.confirm(" Do you want to include lower case letters?");
-      userChoices.lowercase = confirmLowercase;
-      if (userChoices.lowercase == true) {
-        selectedCharacters += lowercase
-  }
-  }
-console.log(selectedCharacters);
+
+var newPassword = ""
  for (var i = 0; i < userChoices.length; i++) {
- generatePassword = chosenPossiblities.CharAt(Math.floor(Math.random() * userChoices.length));
-   console.log(userChoices) 
+   //console.log(allPossibilities)
+   //console.log(allPossibilities[Math.floor(Math.random() * allPossibilities.length)])
+ newPassword = newPassword + allPossibilities[Math.floor(Math.random() * allPossibilities.length)];
+   //console.log(userChoices) 
 }
 
- return generatePassword()
+ return newPassword
 };
 
 // Get references to the #generate element
